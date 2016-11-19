@@ -12,14 +12,26 @@ $country = $_GET['country'];
 if ($country == 'all=true')
 {
     $stmt = $conn->query("SELECT * FROM countries");
-}else {
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo '<ul>';
+    foreach ($results as $row) {
+        echo '<li>' . $row['name'] . ' is ruled by ' . $row['head_of_state'] . '</li>';
+    }
+    echo '</ul>';
+}
+elseif($country == ' ')
+{
+    echo 'No results';
+}
+else 
+{
     $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo '<ul>';
+    foreach ($results as $row) {
+        echo '<li>' . $row['name'] . ' is ruled by ' . $row['head_of_state'] . '</li>';
+    }
+    echo '</ul>';
 }
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo '<ul>';
-foreach ($results as $row) {
-  echo '<li>' . $row['name'] . ' is ruled by ' . $row['head_of_state'] . '</li>';
-}
-echo '</ul>';
