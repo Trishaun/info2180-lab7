@@ -19,10 +19,6 @@ if ($country == 'all=true')
     }
     echo '</ul>';
 }
-elseif($country == ' ')
-{
-    echo 'No results';
-}
 else 
 {
     $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
